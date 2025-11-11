@@ -93,3 +93,7 @@ Estructura (resumen)
 │       ├── HttpUtil.java         # utilitario HttpClient (opcional)
 │       └── ...
 └── README.md
+
+---
+title: README
+---
