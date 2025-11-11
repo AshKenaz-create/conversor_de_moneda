@@ -38,7 +38,66 @@ Proyecto del desafío: un conversor de monedas por consola que consume la **Exch
 
 ---
 
+Cómo correr
+
+Clona/abre el proyecto en IntelliJ.
+
+Verifica que libs/gson-2.13.2.jar esté agregado como dependencia
+(File → Project Structure → Modules → Dependencies).
+
+Ejecuta la clase app.ConversorCLI.
+
+Sigue el menú para convertir monedas o ver tasas favoritas.
+
+Alternativa (Terminal, desde el root del proyecto):
+
+javac -cp libs/gson-2.13.2.jar src/app/*.java -d out
+java  -cp "out:libs/gson-2.13.2.jar" app.ConversorCLI
+
+Endpoints usados
+
+Ping/latest:
+https://v6.exchangerate-api.com/v6/{API_KEY}/latest/USD
+
+Par con monto:
+https://v6.exchangerate-api.com/v6/{API_KEY}/pair/{FROM}/{TO}/{AMOUNT}
+
 ## Configurar la API Key
+
+.../pair/USD/COP/150
+
+Tecnologías
+
+Java 17+ / JDK 25
+
+java.net.http.HttpClient (HttpRequest, HttpResponse)
+
+Gson (parseo JSON)
+
+IntelliJ IDEA
+
+Estructura (resumen)
+
+.
+├── libs/
+│   └── gson-2.13.2.jar
+├── docs/
+│   ├── img/
+│   │   ├── menu-cli.png
+│   │   └── run-usd-cop.png
+│   ├── index.md
+│   └── readme.md
+├── src/
+│   └── app/
+│       ├── ConversorCLI.java
+│       ├── HttpUtil.java
+│       └── ...
+└── README.md
+
+### Importante
+- En **`docs/index.md`** deja el enlace así:
+  ```md
+  - Repo: [README](./readme.html)
 
 ```bash
 EXCHANGE_API_KEY=TU_CLAVE
