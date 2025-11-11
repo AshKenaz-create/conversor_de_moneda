@@ -94,10 +94,3 @@ Estructura (resumen)
 │       └── ...
 └── README.md
 
-### Importante
-- En **`docs/index.md`** deja el enlace así:
-  ```md
-  - Repo: [README](./readme.html)
-
-```bash
-EXCHANGE_API_KEY=TU_CLAVE
