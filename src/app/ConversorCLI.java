@@ -3,10 +3,6 @@ package app;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -31,22 +27,15 @@ public class ConversorCLI {
         System.out.print("Monto a convertir: ");
         double amount = Double.parseDouble(sc.nextLine().trim());
 
-        URI uri = URI.create("https://v6.exchangerate-api.com/v6/" + apiKey +
-                "/pair/" + from + "/" + to + "/" + amount);
+        // <<< aquí mezclamos la idea: usamos HttpUtil.get con la URL de /pair >>>
+        String url = "https://v6.exchangerate-api.com/v6/" + apiKey +
+                "/pair/" + from + "/" + to + "/" + amount;
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest req = HttpRequest.newBuilder().uri(uri).build();
-        HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
+        String body = HttpUtil.get(url);
 
-        if (res.statusCode() != 200) {
-            System.out.println("Error HTTP: " + res.statusCode());
-            System.out.println(res.body());
-            return;
-        }
-
-        JsonObject json = JsonParser.parseString(res.body()).getAsJsonObject();
+        JsonObject json = JsonParser.parseString(body).getAsJsonObject();
         if (!"success".equalsIgnoreCase(json.get("result").getAsString())) {
-            System.out.println("La API respondió error:\n" + res.body());
+            System.out.println("La API respondió error:\n" + body);
             return;
         }
 
@@ -55,8 +44,8 @@ public class ConversorCLI {
 
         System.out.println("\n==== Resultado ====");
         System.out.println("De: " + from + "  A: " + to);
-        System.out.println("Tasa: " + rate);
-        System.out.println("Monto: " + amount);
-        System.out.println("Convertido: " + converted);
+        System.out.printf("Tasa: %.4f%n", rate);
+        System.out.printf("Monto: %.2f%n", amount);
+        System.out.printf("Convertido: %.2f%n", converted);
     }
 }
