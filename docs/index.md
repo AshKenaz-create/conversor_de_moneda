@@ -9,4 +9,4 @@ Demo del proyecto (Java + HttpClient + Gson).
 ![Menú](./img/menu-cli.png)
 ![Ejecución USD→COP](./img/run-usd-cop.png)
 
-- Repo: [README]({{ site.baseurl }}/readme.html)
+- Repo: [README](./readme.html)
